@@ -1,7 +1,9 @@
-import { Client } from "discord.js";
+import { Client, ClientOptions } from "discord.js";
 
 console.log("Bot is starting...");
 require('dotenv').config();
+
+const token = process.env.TOKEN;
 
 const client = new Client({
   intents: [],
