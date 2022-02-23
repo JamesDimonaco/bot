@@ -1,12 +1,22 @@
-import { Client, ClientOptions } from "discord.js";
+import { Client } from "discord.js";
 
 console.log("Bot is starting...");
 require('dotenv').config();
 
-const token = process.env.TOKEN;
 
 const client = new Client({
-  intents: [],
+  intents: [
+    "GUILDS",
+    "GUILD_MEMBERS",
+    "GUILD_BANS",
+    "GUILD_PRESENCES",
+    "GUILD_VOICE_STATES",
+    "GUILD_MESSAGES",
+    "GUILD_MESSAGE_REACTIONS",
+    "DIRECT_MESSAGES",
+    "DIRECT_MESSAGE_REACTIONS",
+  ],
+  partials: ["REACTION", "MESSAGE", "CHANNEL"],
 });
 
 client.login(process.env.DISCORD_TOKEN);
@@ -16,7 +26,16 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
+  console.log(msg);
+  
   if (msg.content === 'ping') {
     msg.reply('pong');
   }
 });
+
+client.addListener('message', (msg) => {
+  if (msg.content === 'ping') {
+    msg.reply('pong');
+  }
+});
+
